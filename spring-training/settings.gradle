@@ -1,1 +1,3 @@
 rootProject.name = 'spring-training'
+include 'user-service'
+
