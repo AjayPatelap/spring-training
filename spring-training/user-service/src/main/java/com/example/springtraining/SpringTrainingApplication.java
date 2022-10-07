@@ -19,19 +19,24 @@ public class SpringTrainingApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		User user = new User();
+		user.setUserID(1);
 		user.setUserName("Raj");
 		user.setUserPhoneNo("9713664700");
 		user.setUserAddress("127/10 near xyz MP");
 		user.setUserEmail("raj@gmail.com");
 		user.setPassword("123456");
-		userRepository.save(user);
+		if(!userRepository.existsById(user.getUserID()))
+			userRepository.save(user);
 
 		User user1 = new User();
+		user1.setUserID(2);
 		user1.setUserName("aman");
 		user1.setUserPhoneNo("9713564700");
 		user1.setUserAddress("130/10 near aman MP");
 		user1.setUserEmail("aman@gmail.com");
 		user1.setPassword("123456");
-		userRepository.save(user1);
+		if(!userRepository.existsById(user1.getUserID()))
+			userRepository.save(user1);
 	}
 }
+

@@ -1,22 +1,35 @@
+val springBootVersion: String by project
+val MySQLVersion: String by project
+
+
 plugins {
-	id 'org.springframework.boot' version '2.7.4'
-	id 'io.spring.dependency-management' version '1.0.14.RELEASE'
-	id 'java'
+	id ("io.spring.dependency-management") version "1.0.14.RELEASE"
+	id("org.springframework.boot") version "2.7.4"
+	id("java")
 }
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+group = "com.example.springtraining"
+version = "0.0.1-SNAPSHOT"
 
-repositories {
-	mavenCentral()
+
+allprojects {
+	repositories {
+		mavenCentral()
+	}
 }
 
-dependencies {
-	implementation group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:'
-	implementation 'org.springframework.boot:spring-boot-starter-web:'
-	runtimeOnly 'mysql:mysql-connector-java'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test:'
+subprojects{
+	apply(plugin = "io.spring.dependency-management")
+	apply(plugin = "org.springframework.boot")
+	dependencyManagement{
+		dependencies{
+			dependency ("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
+			dependency ("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+			dependency ("mysql:mysql-connector-java:$MySQLVersion")
+			dependency ("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+		}
+	}
 }
+
+
 
